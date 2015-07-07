@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Detail</title>
+        <style type="text/css">
+            pre {
+                background-color: ghostwhite;
+                border: 1px solid silver;
+                padding: 10px 20px;
+                margin: 20px;
+                }
+            .json-key {
+                color: brown;
+                }
+            .json-value {
+                color: navy;
+                }
+            .json-string {
+                color: olive;
+            }
+    </style>
+</head>
+<body>
+
+    <ul>
+        <li>Username:<pre><code id="username" data-body={{username}}>{{username}}</code></pre></li>
+        <li>Body:<pre><code id="body" data-body={{body}}>{{body}}</code></pre></li>
+        <li>Timestamp:<pre><code id="timestamp" data-body={{timestamp}}>{{timestamp}}</code></pre></li>
+        <li>Method:<pre><code id="method" data-body={{method}}>{{method}}</code></pre></li>
+        <li>Cookies:<pre><code id="cookies" data-body={{cookies}}>{{cookies}}</code></pre></li>
+        <li>Access Token:<pre><code id="accesstoken" data-body={{accesstoken}}>{{accesstoken}}</code></pre></li>
+        <li>Headers:<pre><code id="headers" data-body={{headers}}>{{headers}}</code></pre></li>
+        <li>Query:<pre><code id="query" data-body={{query}}>{{query}}</code></pre></li>
+        <li>Path:<pre><code id="path" data-body={{path}}>{{path}}</code></pre></li>
+        <li>Remoteip:<pre><code id="remoteip" data-body={{remoteip}}>{{remoteip}}</code></pre></li>
+    </ul>
+
+</body>
+<footer>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script type="text/javascript">
+        if (!library)
+           var library = {};
+
+        library.json = {
+           replacer: function(match, pIndent, pKey, pVal, pEnd) {
+              var key = '<span class=json-key>';
+              var val = '<span class=json-value>';
+              var str = '<span class=json-string>';
+              var r = pIndent || '';
+              if (pKey)
+                 r = r + key + pKey.replace(/[": ]/g, '') + '</span>: ';
+              if (pVal)
+                 r = r + (pVal[0] == '"' ? str : val) + pVal + '</span>';
+              return r + (pEnd || '');
+              },
+           prettyPrint: function(obj) {
+              var jsonLine = /^( *)("[\w]+": )?("[^"]*"|[\w.+-]*)?([,[{])?$/mg;
+              return JSON.stringify(obj, null, 3)
+                 .replace(/&/g, '&amp;').replace(/\\"/g, '&quot;')
+                 .replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                 .replace(jsonLine, library.json.replacer);
+              }
+           };
+
+
+      var body;
+        $.get('/body/' + '{{id}}', function(response){
+            data = response
+
+            $.each(data, function(i){
+                console.log(i);
+                $('#'+i).html(library.json.prettyPrint(data[i]));
+            })
+
+            // $('.body').html(library.json.prettyPrint(body));
+
+        });
+        </script>
+</footer>
+</html>

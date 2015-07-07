@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    </head>
+
+    <body>
+
+    <div class="container">
+            <div class="jumbotron">
+                <h1 class="text-info" style="text-align:center;">MongoDB Logs</h1>
+            </div>
+
+            <div class="col-md-12">
+            <table class="table table-condensed table-hover table-bordered"  data-toggle="table" data-cache="false" data-height="299">
+
+                <tr>
+                    <th>Time</th>
+                    <th>Username</th>
+                    <th>Url</th>
+                </tr>
+
+                {% if last %}
+                {% for i in objects %}
+
+                <tr>
+                    <td><a href="/detail/{{ i.id }}">{{ i.time }}</a></td>
+                    <td>{{ i.username }}</td>
+                    <td>{{ i.url }}</td>
+                </tr>
+
+                {% endfor %}
+                {% endif %}
+
+
+            </table>
+            <ul class="pager">
+
+                <li><a href='/next' value="next" class='button'>Next Page</a></li>
+
+            </ul>
+        </div>
+        </div>
+
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    </body>
+</html>
