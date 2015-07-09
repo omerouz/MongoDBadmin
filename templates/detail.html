@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>Detail</title>
+    <head>
+        <meta charset="UTF-8">
+        <title>Detail</title>
         <style type="text/css">
             pre {
                 background-color: ghostwhite;
@@ -20,10 +20,16 @@
             .json-string {
                 color: olive;
             }
-    </style>
-</head>
-<body>
+        </style>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    </head>
 
+
+<body>
+<div class="container">
+    <ul class="pager">
+        <li><a href='{{redirect}}' class='button'>Back</a></li>
+    </ul>
     <ul>
         <li>Username:<pre><code id="username" data-body={{username}}>{{username}}</code></pre></li>
         <li>Body:<pre><code id="body" data-body={{body}}>{{body}}</code></pre></li>
@@ -36,6 +42,8 @@
         <li>Path:<pre><code id="path" data-body={{path}}>{{path}}</code></pre></li>
         <li>Remoteip:<pre><code id="remoteip" data-body={{remoteip}}>{{remoteip}}</code></pre></li>
     </ul>
+
+</div>
 
 </body>
 <footer>
@@ -79,5 +87,6 @@
 
         });
         </script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </footer>
 </html>

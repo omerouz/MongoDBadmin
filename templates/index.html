@@ -2,17 +2,28 @@
 <html lang="en">
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
     </head>
 
     <body>
 
+
     <div class="container">
             <div class="jumbotron">
-                <h1 class="text-info" style="text-align:center;">MongoDB Logs</h1>
+                <h1 class="text-info" style="text-align:center;">Chroma Logs</h1>
             </div>
 
+
+
             <div class="col-md-12">
-            <table class="table table-condensed table-hover table-bordered"  data-toggle="table" data-cache="false" data-height="299">
+
+                <form action="/search/">
+                    From:<input type="datetime-local" autocomplete="off" name="date_from">
+                    To:<input type="datetime-local" autocomplete="off" name="date_to" id="date">
+                    <button type="submit" id="search" class="btn btn-default">Submit</button>
+                </form>
+
+                <table class="table table-condensed table-hover table-bordered" id="table" data-toggle="table" data-cache="false" data-height="299">
 
                 <tr>
                     <th>Time</th>
@@ -20,8 +31,9 @@
                     <th>Url</th>
                 </tr>
 
-                {% if last %}
-                {% for i in objects %}
+
+                    {% if objects %}
+                    {% for i in objects %}
 
                 <tr>
                     <td><a href="/detail/{{ i.id }}">{{ i.time }}</a></td>
@@ -29,20 +41,38 @@
                     <td>{{ i.url }}</td>
                 </tr>
 
-                {% endfor %}
-                {% endif %}
+                    {% endfor %}
+                    {% else %}
+
+                        <h1>No logs can be found!</h1>
+
+                    {% endif %}
 
 
             </table>
+
+
             <ul class="pager">
 
-                <li><a href='/next' value="next" class='button'>Next Page</a></li>
+                <li><a href="/?offset={{offset}}" id="next" class="button">Next Page</a></li>
 
             </ul>
         </div>
         </div>
 
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+            <script type="text/javascript">
+
+                $(function() {
+                    var has_next = {{ has_next }};
+
+                    if (has_next <= 0) {
+                        $("#table").hide();
+                        $("#next").hide();
+                    };
+                });
+
+        </script>
     </body>
 </html>
+
