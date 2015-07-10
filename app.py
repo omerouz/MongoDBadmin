@@ -14,15 +14,12 @@ page_end = 15
 @app.route('/')
 def home_page():
     offset = request.args.get('offset')
-
     if offset:
         results = list(db.logs.find({'_id': {'$lt': ObjectId(offset)}}).sort('_id', -1).limit(15))
     else:
         results = list(db.logs.find().sort('_id', -1).limit(15))
 
     offset_id = results[14].get('_id')
-
-    #last = results[page:page_end]
     objects = []
 
 
@@ -60,8 +57,6 @@ def search():
         return render_template('index.html', objects=objects,
                                              results=results,
                                              has_next= len(objects))
-
-
     else:
         abort(404)
 
