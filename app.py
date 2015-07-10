@@ -35,30 +35,61 @@ def time_format(datetime_):
     dt = datetime.strptime(datetime_, "%Y-%m-%dT%H:%M")
     return dt
 
+def response_(response):
+    objects = []
+    results = list(response)
+    for i in results:
+        item = {}
+        item['time'] = i.get('timestamp')
+        item['username'] = i.get('username')
+        item['url'] = i.get('url')
+        item['id'] = i.get('_id')
+        objects.append(item)
+    return objects
+
+
 @app.route('/search/')
 def search():
-    date_from = request.args.get('date_from')
-    date_to = request.args.get('date_to')
-    response = db.logs.find({'$and': [{'timestamp': {'$gt': time_format(date_from)}},
+    if request.args.get('date_from'):
+        date_from = request.args.get('date_from')
+        date_to = request.args.get('date_to')
+        response = db.logs.find({'$and': [{'timestamp': {'$gt': time_format(date_from)}},
                                       {'timestamp': {'$lt': time_format(date_to)}}]}).sort('_id', -1)
 
-    if response:
-        objects = []
-        results = list(response)
-        for i in results:
-            item = {}
-            item['time'] = i.get('timestamp')
-            item['username'] = i.get('username')
-            item['url'] = i.get('url')
-            item['id'] = i.get('_id')
-            objects.append(item)
+        if response:
 
-        return render_template('index.html', objects=objects,
-                                             results=results,
+            objects = response_(list(response))
+            return render_template('index.html', objects=objects,
                                              has_next= len(objects),
                                             date_from=date_from,
-                                            date_to=date_to,
-                                            )
+                                            date_to=date_to)
+
+    elif request.args.get('user'):
+        user = request.args.get('user')
+        response = db.logs.find({"username": user}).sort('_id', -1)
+
+        if response:
+
+            objects = response_(list(response))
+            return render_template('index.html', objects=objects,
+                                                has_next= len(objects),
+                                                user = user)
+    elif request.args.get('user') and request.args.get('date_from'):
+        date_from = request.args.get('date_from')
+        date_to = request.args.get('date_to')
+        user = request.args.get('user')
+        response = db.logs.find({'$and': [{'timestamp': {'$gt': time_format(date_from)}},
+                                      {'timestamp': {'$lt': time_format(date_to)}}]}).sort('username', user).sort('_id', -1)
+
+        if response:
+
+            objects = response_(list(response))
+            print(objects)
+            return render_template('index.html', objects=objects,
+                                                has_next= len(objects),
+                                                user = user,
+                                                date_to=date_to,
+                                                date_from=date_from)
 
     else:
         abort(404)
@@ -91,3 +122,23 @@ def redirect_url(default='index'):
 if __name__ == '__main__':
     app.debug = True
     app.run()
+
+
+
+
+
+
+
+'''
+   if response:
+        objects = []
+        results = list(response)
+        for i in results:
+            item = {}
+            item['time'] = i.get('timestamp')
+            item['username'] = i.get('username')
+            item['url'] = i.get('url')
+            item['id'] = i.get('_id')
+            objects.append(item)
+'''
+

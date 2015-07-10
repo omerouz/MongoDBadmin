@@ -17,13 +17,17 @@
         </div>
         </div>
 
-        <div class="col-md-12">
-
+            <div class="container">
             <form action="/search/" id="form">
                 From:<input type="datetime-local" autocomplete="off" name="date_from" id="date_from" {% if date_from %} value="{{date_from}}" {% endif %}>
                 To:<input type="datetime-local" autocomplete="off" name="date_to" id="date_to" {% if date_to %} value="{{date_to}}" {% endif %}>
+                <input type="search" placeholder="username" name="user" id="user">
                 <button type="submit" id="search" class="btn btn-default">Submit</button>
             </form>
+            </div>
+
+        <div class="col-md-12">
+
 
             <table class="table table-hover table-bordered" id="table" data-toggle="table" data-cache="false" data-height="299">
 
@@ -51,14 +55,14 @@
                     {% endif %}
 
             </table>
-
+    {% if offset %}
 
             <ul class="pager">
 
                 <li><a href="/?offset={{offset}}" id="next" class="button">Next Page</a></li>
 
             </ul>
-
+    {% endif %}
         </div>
 
     </div>
