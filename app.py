@@ -122,23 +122,3 @@ def redirect_url(default='index'):
 if __name__ == '__main__':
     app.debug = True
     app.run()
-
-
-
-
-
-
-
-'''
-   if response:
-        objects = []
-        results = list(response)
-        for i in results:
-            item = {}
-            item['time'] = i.get('timestamp')
-            item['username'] = i.get('username')
-            item['url'] = i.get('url')
-            item['id'] = i.get('_id')
-            objects.append(item)
-'''
-
