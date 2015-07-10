@@ -50,41 +50,65 @@ def response_(response):
 
 @app.route('/search/')
 def search():
-    if request.args.get('date_from'):
+    #offset = request.args.get('offset')
+    if request.args.get('date_from') and not request.args.get('user'):
         date_from = request.args.get('date_from')
         date_to = request.args.get('date_to')
+        #responsedb = db.logs.find({'$and': [{'timestamp': {'$gt': time_format(date_from)}},
+        #                              {'timestamp': {'$lt': time_format(date_to)}}]})
+        #if offset:
+        #    response = db.logs.find({'$and': [{'timestamp': {'$gt': time_format(date_from)}},
+        #                              {'timestamp': {'$lt': time_format(date_to)}}]}).sort('_id', {'$lt': ObjectId(offset)}).limit(50)
+        # else:
         response = db.logs.find({'$and': [{'timestamp': {'$gt': time_format(date_from)}},
                                       {'timestamp': {'$lt': time_format(date_to)}}]}).sort('_id', -1)
 
-        if response:
 
-            objects = response_(list(response))
+        if response:
+            results = list(response)
+            objects = response_(results)
+            #index = len(results)-1
+            #offset_id = results[index].get('_id')
             return render_template('index.html', objects=objects,
                                              has_next= len(objects),
                                             date_from=date_from,
                                             date_to=date_to)
 
-    elif request.args.get('user'):
+    elif request.args.get('user') and not request.args.get('date_from'):
         user = request.args.get('user')
         response = db.logs.find({"username": user}).sort('_id', -1)
 
-        if response:
+        #if offset:
+        #    response = responsedb.sort('_id', {'$lt': ObjectId(offset)}).limit[50]
+        #else:
+        #   response = responsedb
 
-            objects = response_(list(response))
+        if response:
+            results = list(response)
+            objects = response_(results)
+            #index = len(results)-1
+            #offset_id = results[index].get('_id')
             return render_template('index.html', objects=objects,
                                                 has_next= len(objects),
                                                 user = user)
+
     elif request.args.get('user') and request.args.get('date_from'):
         date_from = request.args.get('date_from')
         date_to = request.args.get('date_to')
         user = request.args.get('user')
         response = db.logs.find({'$and': [{'timestamp': {'$gt': time_format(date_from)}},
-                                      {'timestamp': {'$lt': time_format(date_to)}}]}).sort('username', user).sort('_id', -1)
+                                      {'timestamp': {'$lt': time_format(date_to)}}]}).sort('_id', -1)
+
+        #if offset:
+            #response = responsedb.sort('_id', {'$lt': ObjectId(offset)}).limit[50]
+        #else:
+        #    response = responsedb
 
         if response:
-
-            objects = response_(list(response))
-            print(objects)
+            results = list(response)
+            objects = response_(results)
+            #index = len(results)-1
+            #offset_id = results[index].get('_id')
             return render_template('index.html', objects=objects,
                                                 has_next= len(objects),
                                                 user = user,
