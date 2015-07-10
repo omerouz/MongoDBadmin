@@ -8,18 +8,16 @@ from datetime import datetime
 client = MongoClient('mongodb://localhost:27017/')
 db = client.chroma
 app = Flask(__name__)
-page = 0
-page_end = 15
 
 @app.route('/')
 def home_page():
     offset = request.args.get('offset')
     if offset:
-        results = list(db.logs.find({'_id': {'$lt': ObjectId(offset)}}).sort('_id', -1).limit(15))
+        results = list(db.logs.find({'_id': {'$lt': ObjectId(offset)}}).sort('_id', -1).limit(50))
     else:
-        results = list(db.logs.find().sort('_id', -1).limit(15))
+        results = list(db.logs.find().sort('_id', -1).limit(50))
 
-    offset_id = results[14].get('_id')
+    offset_id = results[49].get('_id')
     objects = []
 
 
@@ -43,6 +41,7 @@ def search():
     date_to = request.args.get('date_to')
     response = db.logs.find({'$and': [{'timestamp': {'$gt': time_format(date_from)}},
                                       {'timestamp': {'$lt': time_format(date_to)}}]}).sort('_id', -1)
+
     if response:
         objects = []
         results = list(response)
@@ -56,7 +55,11 @@ def search():
 
         return render_template('index.html', objects=objects,
                                              results=results,
-                                             has_next= len(objects))
+                                             has_next= len(objects),
+                                            date_from=date_from,
+                                            date_to=date_to,
+                                            )
+
     else:
         abort(404)
 

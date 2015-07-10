@@ -31,16 +31,45 @@
         <li><a href='{{redirect}}' class='button'>Back</a></li>
     </ul>
     <ul>
-        <li>Username:<pre><code id="username" data-body={{username}}>{{username}}</code></pre></li>
-        <li>Body:<pre><code id="body" data-body={{body}}>{{body}}</code></pre></li>
-        <li>Timestamp:<pre><code id="timestamp" data-body={{timestamp}}>{{timestamp}}</code></pre></li>
-        <li>Method:<pre><code id="method" data-body={{method}}>{{method}}</code></pre></li>
-        <li>Cookies:<pre><code id="cookies" data-body={{cookies}}>{{cookies}}</code></pre></li>
-        <li>Access Token:<pre><code id="accesstoken" data-body={{accesstoken}}>{{accesstoken}}</code></pre></li>
-        <li>Headers:<pre><code id="headers" data-body={{headers}}>{{headers}}</code></pre></li>
-        <li>Query:<pre><code id="query" data-body={{query}}>{{query}}</code></pre></li>
-        <li>Path:<pre><code id="path" data-body={{path}}>{{path}}</code></pre></li>
-        <li>Remoteip:<pre><code id="remoteip" data-body={{remoteip}}>{{remoteip}}</code></pre></li>
+        <li>Username:<span class="glyphicon glyphicon-triangle-top" id="usernamebutton"></span>
+            <pre class="username"><code id="username" data-body={{username}}>{{username}}</code></pre>
+        </li>
+
+        <li>Body:<span class="glyphicon glyphicon-triangle-top" id="bodybutton"></span>
+            <pre class="body"><code id="body" data-body={{body}}>{{body}}</code></pre>
+        </li>
+
+        <li>Timestamp:<span class="glyphicon glyphicon-triangle-top" id="timebutton"></span>
+            <pre class="timestamp"><code id="timestamp" data-body={{timestamp}}>{{timestamp}}</code></pre>
+        </li>
+
+        <li>Method:<span class="glyphicon glyphicon-triangle-top" id="methodbutton"></span>
+            <pre class="method"><code id="method" data-body={{method}}>{{method}}</code></pre>
+        </li>
+
+        <li>Cookies:<span class="glyphicon glyphicon-triangle-top" id="cookiesbutton"></span>
+            <pre class="cookies"><code id="cookies" data-body={{cookies}}>{{cookies}}</code></pre>
+        </li>
+
+        <li>Access Token:<span class="glyphicon glyphicon-triangle-top" id="atbutton"></span>
+            <pre class="accesstoken"><code id="accesstoken" data-body={{accesstoken}}>{{accesstoken}}</code></pre>
+        </li>
+
+        <li>Headers:<span class="glyphicon glyphicon-triangle-top" id="headersbutton"></span>
+            <pre class="headers"><code id="headers" data-body={{headers}}>{{headers}}</code></pre>
+        </li>
+
+        <li>Query:<span class="glyphicon glyphicon-triangle-top" id="querybutton"></span>
+            <pre class="query"><code id="query" data-body={{query}}>{{query}}</code></pre>
+        </li>
+
+        <li>Path:<span class="glyphicon glyphicon-triangle-top" id="pathbutton"></span>
+            <pre class="path"><code id="path" data-body={{path}}>{{path}}</code></pre>
+        </li>
+
+        <li>Remoteip:<span class="glyphicon glyphicon-triangle-top" id="remotebutton"></span>
+            <pre class="remoteip"><code id="remoteip" data-body={{remoteip}}>{{remoteip}}</code></pre>
+        </li>
     </ul>
 
 </div>
@@ -81,11 +110,141 @@
             $.each(data, function(i){
                 console.log(i);
                 $('#'+i).html(library.json.prettyPrint(data[i]));
-            })
+            });
 
-            // $('.body').html(library.json.prettyPrint(body));
+            $(document).on('click', "#bodybutton", function(event) {
+                if ($("#bodybutton").attr('about') === "top"){
+                    $("#bodybutton").attr( "class", "glyphicon glyphicon-triangle-top" );
+                    $("#bodybutton").removeAttr("about")
+                }
+                else {
+                    $("#bodybutton").attr( "class", "glyphicon glyphicon-triangle-bottom" );
+                    $("#bodybutton").attr( "about", "top" );
+                }
+
+                $(".body").toggle();
+            });
+
+            $(document).on('click', "#usernamebutton", function(event) {
+                if ($("#usernamebutton").attr('about') === "top"){
+                    $("#usernamebutton").attr( "class", "glyphicon glyphicon-triangle-top" );
+                    $("#usernamebutton").removeAttr("about")
+                }
+                else {
+                    $("#usernamebutton").attr( "class", "glyphicon glyphicon-triangle-bottom" );
+                    $("#usernamebutton").attr( "about", "top" );
+                }
+
+                $(".username").toggle();
+            });
+
+            $(document).on('click', "#methodbutton", function(event) {
+                if ($("#methodbutton").attr('about') === "top"){
+                    $("#methodbutton").attr( "class", "glyphicon glyphicon-triangle-top" );
+                    $("#methofbutton").removeAttr("about")
+                }
+                else {
+                    $("#methodbutton").attr( "class", "glyphicon glyphicon-triangle-bottom" );
+                    $("#methodbutton").attr( "about", "top" );
+                }
+
+                $(".method").toggle();
+            });
+
+            $(document).on('click', "#timebutton", function(event) {
+                if ($("#timebutton").attr('about') === "top"){
+                    $("#timebutton").attr( "class", "glyphicon glyphicon-triangle-top" );
+                    $("#timebutton").removeAttr("about")
+                }
+                else {
+                    $("#timebutton").attr( "class", "glyphicon glyphicon-triangle-bottom" );
+                    $("#timebutton").attr( "about", "top" );
+                }
+
+                $(".timestamp").toggle();
+            });
+
+            $(document).on('click', "#cookiesbutton", function(event) {
+                if ($("#cookiesbutton").attr('about') === "top"){
+                    $("#cookiesbutton").attr( "class", "glyphicon glyphicon-triangle-top" );
+                    $("#cookiesbutton").removeAttr("about")
+                }
+                else {
+                    $("#cookiesbutton").attr( "class", "glyphicon glyphicon-triangle-bottom" );
+                    $("#cookiesbutton").attr( "about", "top" );
+                }
+
+                $(".cookies").toggle();
+            });
+
+            $(document).on('click', "#querybutton", function(event) {
+                if ($("#querybutton").attr('about') === "top"){
+                    $("#querybutton").attr( "class", "glyphicon glyphicon-triangle-top" );
+                    $("#querybutton").removeAttr("about")
+                }
+                else {
+                    $("#querybutton").attr( "class", "glyphicon glyphicon-triangle-bottom" );
+                    $("#querybutton").attr( "about", "top" );
+                }
+
+                $(".query").toggle();
+            });
+
+            $(document).on('click', "#atbutton", function(event) {
+                if ($("#atbutton").attr('about') === "top"){
+                    $("#atbutton").attr( "class", "glyphicon glyphicon-triangle-top" );
+                    $("#atbutton").removeAttr("about")
+                }
+                else {
+                    $("#atbutton").attr( "class", "glyphicon glyphicon-triangle-bottom" );
+                    $("#atbutton").attr( "about", "top" );
+                }
+
+                $(".accesstoken").toggle();
+            });
+
+            $(document).on('click', "#headersbutton", function(event) {
+                if ($("#headersbutton").attr('about') === "top"){
+                    $("#headersbutton").attr( "class", "glyphicon glyphicon-triangle-top" );
+                    $("#headersbutton").removeAttr("about")
+                }
+                else {
+                    $("#headersbutton").attr( "class", "glyphicon glyphicon-triangle-bottom" );
+                    $("#headersbutton").attr( "about", "top" );
+                }
+
+                $(".headers").toggle();
+            });
+
+            $(document).on('click', "#pathbutton", function(event) {
+                if ($("#pathbutton").attr('about') === "top"){
+                    $("#pathbutton").attr( "class", "glyphicon glyphicon-triangle-top" );
+                    $("#pathbutton").removeAttr("about")
+                }
+                else {
+                    $("#pathbutton").attr( "class", "glyphicon glyphicon-triangle-bottom" );
+                    $("#pathbutton").attr( "about", "top" );
+                }
+
+                $(".path").toggle();
+            });
+
+            $(document).on('click', "#remotebutton", function(event) {
+                if ($("#remotebutton").attr('about') === "top"){
+                    $("#remotebutton").attr( "class", "glyphicon glyphicon-triangle-top" );
+                    $("#remotebutton").removeAttr("about")
+                }
+                else {
+                    $("#remotebutton").attr( "class", "glyphicon glyphicon-triangle-bottom" );
+                    $("#remotebutton").attr( "about", "top" );
+                }
+
+                $(".remoteip").toggle();
+            });
 
         });
+
+
         </script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </footer>
