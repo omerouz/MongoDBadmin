@@ -9,8 +9,12 @@
     <div class="container">
 
         <div class="jumbotron">
+            <div class="container">
+                    <a href="/" style="text-decoration: none">
+                        <h1 class="text-info" style="text-align:center;">Chroma Logs</h1>
+                    </a>
 
-                <a href="/" style="text-decoration: none"><h1 class="text-info" style="text-align:center;">Chroma Logs</h1></a>
+        </div>
         </div>
 
         <div class="col-md-12">
@@ -34,8 +38,8 @@
                     {% for i in objects %}
 
                 <tr>
-                    <td><a href="/detail/{{ i.id }}">{{ i.time }}</a></td>
-                    <td>{{ i.username }}</td>
+                    <td align="center"><a href="/detail/{{ i.id }}">{{ i.time }}</a></td>
+                    <td align="center">{{ i.username }}</td>
                     <td>{{ i.url }}</td>
                 </tr>
 
