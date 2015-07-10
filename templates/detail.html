@@ -230,13 +230,13 @@
             });
 
             $(document).on('click', "#remotebutton", function(event) {
-                if ($("#remotebutton").attr('about') === "top"){
-                    $("#remotebutton").attr( "class", "glyphicon glyphicon-triangle-top" );
-                    $("#remotebutton").removeAttr("about")
+                if ($("#remotespan").attr('about') === "top"){
+                    $("#remotespan").attr( "class", "glyphicon glyphicon-triangle-top" );
+                    $("#remotespan").removeAttr("about")
                 }
                 else {
-                    $("#remotebutton").attr( "class", "glyphicon glyphicon-triangle-bottom" );
-                    $("#remotebutton").attr( "about", "top" );
+                    $("#remotespan").attr( "class", "glyphicon glyphicon-triangle-bottom" );
+                    $("#remotespan").attr( "about", "top" );
                 }
 
                 $(".remoteip").toggle();
