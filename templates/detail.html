@@ -30,47 +30,47 @@
     <ul class="pager">
         <li><a href='{{redirect}}' class='button'>Back</a></li>
     </ul>
-    <ul>
-        <li>Username:<span class="glyphicon glyphicon-triangle-top" id="usernamebutton"></span>
+
+        <p><button class="btn btn-info" id="usernamebutton">Username:<span class="glyphicon glyphicon-triangle-top" id="usernamespan"></span></button>
             <pre class="username"><code id="username" data-body={{username}}>{{username}}</code></pre>
-        </li>
+        </p>
 
-        <li>Body:<span class="glyphicon glyphicon-triangle-top" id="bodybutton"></span>
+        <p><button class="btn btn-info" id="bodybutton">Body:<span class="glyphicon glyphicon-triangle-top" id="bodyspan"></span></button>
             <pre class="body"><code id="body" data-body={{body}}>{{body}}</code></pre>
-        </li>
+        </p>
 
-        <li>Timestamp:<span class="glyphicon glyphicon-triangle-top" id="timebutton"></span>
+        <p><button class="btn btn-info" id="timebutton">Timestamp:<span class="glyphicon glyphicon-triangle-top" id="timespan"></span></button>
             <pre class="timestamp"><code id="timestamp" data-body={{timestamp}}>{{timestamp}}</code></pre>
-        </li>
+        </p>
 
-        <li>Method:<span class="glyphicon glyphicon-triangle-top" id="methodbutton"></span>
+        <p><button class="btn btn-info" id="methodbutton">Method:<span class="glyphicon glyphicon-triangle-top" id="methodspan"></span></button>
             <pre class="method"><code id="method" data-body={{method}}>{{method}}</code></pre>
-        </li>
+        </p>
 
-        <li>Cookies:<span class="glyphicon glyphicon-triangle-top" id="cookiesbutton"></span>
+        <p><button class="btn btn-info" id="cookiesbutton">Cookies:<span class="glyphicon glyphicon-triangle-top" id="cookiesspan"></span></button>
             <pre class="cookies"><code id="cookies" data-body={{cookies}}>{{cookies}}</code></pre>
-        </li>
+        </p>
 
-        <li>Access Token:<span class="glyphicon glyphicon-triangle-top" id="atbutton"></span>
+        <p><button class="btn btn-info" id="atbutton">Access Token:<span class="glyphicon glyphicon-triangle-top" id="atspan"></span></button>
             <pre class="accesstoken"><code id="accesstoken" data-body={{accesstoken}}>{{accesstoken}}</code></pre>
-        </li>
+        </p>
 
-        <li>Headers:<span class="glyphicon glyphicon-triangle-top" id="headersbutton"></span>
+        <p><button class="btn btn-info" id="headersbutton">Headers:<span class="glyphicon glyphicon-triangle-top" id="headersspan"></span></button>
             <pre class="headers"><code id="headers" data-body={{headers}}>{{headers}}</code></pre>
-        </li>
+        </p>
 
-        <li>Query:<span class="glyphicon glyphicon-triangle-top" id="querybutton"></span>
+        <p><button class="btn btn-info" id="querybutton">Query:<span class="glyphicon glyphicon-triangle-top" id="queryspan"></span></button>
             <pre class="query"><code id="query" data-body={{query}}>{{query}}</code></pre>
-        </li>
+        </p>
 
-        <li>Path:<span class="glyphicon glyphicon-triangle-top" id="pathbutton"></span>
+        <p><button class="btn btn-info" id="pathbutton">Path:<span class="glyphicon glyphicon-triangle-top" id="pathspan"></span></button>
             <pre class="path"><code id="path" data-body={{path}}>{{path}}</code></pre>
-        </li>
+        </p>
 
-        <li>Remoteip:<span class="glyphicon glyphicon-triangle-top" id="remotebutton"></span>
+        <p><button class="btn btn-info" id="remotebutton">Remoteip:<span class="glyphicon glyphicon-triangle-top" id="remotespan"></span></button>
             <pre class="remoteip"><code id="remoteip" data-body={{remoteip}}>{{remoteip}}</code></pre>
-        </li>
-    </ul>
+        </p>
+
 
 </div>
 
@@ -113,117 +113,117 @@
             });
 
             $(document).on('click', "#bodybutton", function(event) {
-                if ($("#bodybutton").attr('about') === "top"){
-                    $("#bodybutton").attr( "class", "glyphicon glyphicon-triangle-top" );
-                    $("#bodybutton").removeAttr("about")
+                if ($("#bodyspan").attr('about') === "top"){
+                    $("#bodyspan").attr( "class", "glyphicon glyphicon-triangle-top" );
+                    $("#bodyspan").removeAttr("about")
                 }
                 else {
-                    $("#bodybutton").attr( "class", "glyphicon glyphicon-triangle-bottom" );
-                    $("#bodybutton").attr( "about", "top" );
+                    $("#bodyspan").attr( "class", "glyphicon glyphicon-triangle-bottom" );
+                    $("#bodyspan").attr( "about", "top" );
                 }
 
                 $(".body").toggle();
             });
 
             $(document).on('click', "#usernamebutton", function(event) {
-                if ($("#usernamebutton").attr('about') === "top"){
-                    $("#usernamebutton").attr( "class", "glyphicon glyphicon-triangle-top" );
-                    $("#usernamebutton").removeAttr("about")
+                if ($("#usernamespan").attr('about') === "top"){
+                    $("#usernamespan").attr( "class", "glyphicon glyphicon-triangle-top" );
+                    $("#usernamespan").removeAttr("about")
                 }
                 else {
-                    $("#usernamebutton").attr( "class", "glyphicon glyphicon-triangle-bottom" );
-                    $("#usernamebutton").attr( "about", "top" );
+                    $("#usernamespan").attr( "class", "glyphicon glyphicon-triangle-bottom" );
+                    $("#usernamespan").attr( "about", "top" );
                 }
 
                 $(".username").toggle();
             });
 
             $(document).on('click', "#methodbutton", function(event) {
-                if ($("#methodbutton").attr('about') === "top"){
-                    $("#methodbutton").attr( "class", "glyphicon glyphicon-triangle-top" );
-                    $("#methofbutton").removeAttr("about")
+                if ($("#methodspan").attr('about') === "top"){
+                    $("#methodspan").attr( "class", "glyphicon glyphicon-triangle-top" );
+                    $("#methodspan").removeAttr("about")
                 }
                 else {
-                    $("#methodbutton").attr( "class", "glyphicon glyphicon-triangle-bottom" );
-                    $("#methodbutton").attr( "about", "top" );
+                    $("#methodspan").attr( "class", "glyphicon glyphicon-triangle-bottom" );
+                    $("#methodspan").attr( "about", "top" );
                 }
 
                 $(".method").toggle();
             });
 
             $(document).on('click', "#timebutton", function(event) {
-                if ($("#timebutton").attr('about') === "top"){
-                    $("#timebutton").attr( "class", "glyphicon glyphicon-triangle-top" );
-                    $("#timebutton").removeAttr("about")
+                if ($("#timespan").attr('about') === "top"){
+                    $("#timespan").attr( "class", "glyphicon glyphicon-triangle-top" );
+                    $("#timespan").removeAttr("about")
                 }
                 else {
-                    $("#timebutton").attr( "class", "glyphicon glyphicon-triangle-bottom" );
-                    $("#timebutton").attr( "about", "top" );
+                    $("#timespan").attr( "class", "glyphicon glyphicon-triangle-bottom" );
+                    $("#timespan").attr( "about", "top" );
                 }
 
                 $(".timestamp").toggle();
             });
 
             $(document).on('click', "#cookiesbutton", function(event) {
-                if ($("#cookiesbutton").attr('about') === "top"){
-                    $("#cookiesbutton").attr( "class", "glyphicon glyphicon-triangle-top" );
-                    $("#cookiesbutton").removeAttr("about")
+                if ($("#cookiesspan").attr('about') === "top"){
+                    $("#cookiesspan").attr( "class", "glyphicon glyphicon-triangle-top" );
+                    $("#cookiesspan").removeAttr("about")
                 }
                 else {
-                    $("#cookiesbutton").attr( "class", "glyphicon glyphicon-triangle-bottom" );
-                    $("#cookiesbutton").attr( "about", "top" );
+                    $("#cookiesspan").attr( "class", "glyphicon glyphicon-triangle-bottom" );
+                    $("#cookiesspan").attr( "about", "top" );
                 }
 
                 $(".cookies").toggle();
             });
 
             $(document).on('click', "#querybutton", function(event) {
-                if ($("#querybutton").attr('about') === "top"){
-                    $("#querybutton").attr( "class", "glyphicon glyphicon-triangle-top" );
-                    $("#querybutton").removeAttr("about")
+                if ($("#queryspan").attr('about') === "top"){
+                    $("#queryspan").attr( "class", "glyphicon glyphicon-triangle-top" );
+                    $("#queryspan").removeAttr("about")
                 }
                 else {
-                    $("#querybutton").attr( "class", "glyphicon glyphicon-triangle-bottom" );
-                    $("#querybutton").attr( "about", "top" );
+                    $("#queryspan").attr( "class", "glyphicon glyphicon-triangle-bottom" );
+                    $("#queryspan").attr( "about", "top" );
                 }
 
                 $(".query").toggle();
             });
 
             $(document).on('click', "#atbutton", function(event) {
-                if ($("#atbutton").attr('about') === "top"){
-                    $("#atbutton").attr( "class", "glyphicon glyphicon-triangle-top" );
-                    $("#atbutton").removeAttr("about")
+                if ($("#atspan").attr('about') === "top"){
+                    $("#atspan").attr( "class", "glyphicon glyphicon-triangle-top" );
+                    $("#atspan").removeAttr("about")
                 }
                 else {
-                    $("#atbutton").attr( "class", "glyphicon glyphicon-triangle-bottom" );
-                    $("#atbutton").attr( "about", "top" );
+                    $("#atspan").attr( "class", "glyphicon glyphicon-triangle-bottom" );
+                    $("#atspan").attr( "about", "top" );
                 }
 
                 $(".accesstoken").toggle();
             });
 
             $(document).on('click', "#headersbutton", function(event) {
-                if ($("#headersbutton").attr('about') === "top"){
-                    $("#headersbutton").attr( "class", "glyphicon glyphicon-triangle-top" );
-                    $("#headersbutton").removeAttr("about")
+                if ($("#headersspan").attr('about') === "top"){
+                    $("#headersspan").attr( "class", "glyphicon glyphicon-triangle-top" );
+                    $("#headersspan").removeAttr("about")
                 }
                 else {
-                    $("#headersbutton").attr( "class", "glyphicon glyphicon-triangle-bottom" );
-                    $("#headersbutton").attr( "about", "top" );
+                    $("#headersspan").attr( "class", "glyphicon glyphicon-triangle-bottom" );
+                    $("#headersspan").attr( "about", "top" );
                 }
 
                 $(".headers").toggle();
             });
 
             $(document).on('click', "#pathbutton", function(event) {
-                if ($("#pathbutton").attr('about') === "top"){
-                    $("#pathbutton").attr( "class", "glyphicon glyphicon-triangle-top" );
-                    $("#pathbutton").removeAttr("about")
+                if ($("#pathspan").attr('about') === "top"){
+                    $("#pathspan").attr( "class", "glyphicon glyphicon-triangle-top" );
+                    $("#pathspan").removeAttr("about")
                 }
                 else {
-                    $("#pathbutton").attr( "class", "glyphicon glyphicon-triangle-bottom" );
-                    $("#pathbutton").attr( "about", "top" );
+                    $("#pathspan").attr( "class", "glyphicon glyphicon-triangle-bottom" );
+                    $("#pathspan").attr( "about", "top" );
                 }
 
                 $(".path").toggle();
