@@ -10,20 +10,20 @@
 
         <div class="jumbotron">
 
-                <h1 class="text-info" style="text-align:center;">Chroma Logs</h1>
+                <a href="/" style="text-decoration: none"><h1 class="text-info" style="text-align:center;">Chroma Logs</h1></a>
         </div>
 
         <div class="col-md-12">
 
-            <form action="/search/">
-                From:<input type="datetime-local" autocomplete="off" name="date_from">
-                To:<input type="datetime-local" autocomplete="off" name="date_to" id="date">
+            <form action="/search/" id="form">
+                From:<input type="datetime-local" autocomplete="off" name="date_from" id="date_from" {% if date_from %} value="{{date_from}}" {% endif %}>
+                To:<input type="datetime-local" autocomplete="off" name="date_to" id="date_to" {% if date_to %} value="{{date_to}}" {% endif %}>
                 <button type="submit" id="search" class="btn btn-default">Submit</button>
             </form>
 
-            <table class="table table-condensed table-hover table-bordered" id="table" data-toggle="table" data-cache="false" data-height="299">
+            <table class="table table-hover table-bordered" id="table" data-toggle="table" data-cache="false" data-height="299">
 
-                <tr>
+                <tr class="info">
                     <th>Time</th>
                     <th>Username</th>
                     <th>Url</th>
@@ -70,8 +70,22 @@
             $("#table").hide();
             $("#next").hide();
         };
-        });
 
+/*
+Javascript code block to keep datetime-local values. The values are stored by the python code for now.
+
+            var url = window.location.href.split("?")[1];
+            var date_first = url.split("&")[0];
+            var date_second = url.split("&")[1];
+            var date_f = date_first.split("=")[1];
+            var date_from = date_f.replace("%3A", ":");
+            var date_s = date_second.split("=")[1];
+            var date_to = date_s.replace("%3A", ":");
+            $("#date_from").attr("value", date_from);
+            $("#date_to").attr("value", date_to);
+*/
+
+        });
     </script>
 
     </body>
