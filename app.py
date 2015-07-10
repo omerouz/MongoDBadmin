@@ -9,6 +9,7 @@ client = MongoClient('mongodb://localhost:27017/')
 db = client.chroma
 app = Flask(__name__)
 
+
 @app.route('/')
 def home_page():
     offset = request.args.get('offset')
@@ -19,8 +20,6 @@ def home_page():
 
     offset_id = results[49].get('_id')
     objects = []
-
-
     for i in results:
         item = {}
         item['time'] = i.get('timestamp')
@@ -34,6 +33,7 @@ def home_page():
 def time_format(datetime_):
     dt = datetime.strptime(datetime_, "%Y-%m-%dT%H:%M")
     return dt
+
 
 def response_(response):
     objects = []
@@ -50,73 +50,38 @@ def response_(response):
 
 @app.route('/search/')
 def search():
-    #offset = request.args.get('offset')
     if request.args.get('date_from') and not request.args.get('user'):
         date_from = request.args.get('date_from')
         date_to = request.args.get('date_to')
-        #responsedb = db.logs.find({'$and': [{'timestamp': {'$gt': time_format(date_from)}},
-        #                              {'timestamp': {'$lt': time_format(date_to)}}]})
-        #if offset:
-        #    response = db.logs.find({'$and': [{'timestamp': {'$gt': time_format(date_from)}},
-        #                              {'timestamp': {'$lt': time_format(date_to)}}]}).sort('_id', {'$lt': ObjectId(offset)}).limit(50)
-        # else:
         response = db.logs.find({'$and': [{'timestamp': {'$gt': time_format(date_from)}},
                                       {'timestamp': {'$lt': time_format(date_to)}}]}).sort('_id', -1)
-
-
-        if response:
-            results = list(response)
-            objects = response_(results)
-            #index = len(results)-1
-            #offset_id = results[index].get('_id')
-            return render_template('index.html', objects=objects,
-                                             has_next= len(objects),
-                                            date_from=date_from,
-                                            date_to=date_to)
+        user = []
 
     elif request.args.get('user') and not request.args.get('date_from'):
         user = request.args.get('user')
         response = db.logs.find({"username": user}).sort('_id', -1)
-
-        #if offset:
-        #    response = responsedb.sort('_id', {'$lt': ObjectId(offset)}).limit[50]
-        #else:
-        #   response = responsedb
-
-        if response:
-            results = list(response)
-            objects = response_(results)
-            #index = len(results)-1
-            #offset_id = results[index].get('_id')
-            return render_template('index.html', objects=objects,
-                                                has_next= len(objects),
-                                                user = user)
+        date_to = []
+        date_from = []
 
     elif request.args.get('user') and request.args.get('date_from'):
         date_from = request.args.get('date_from')
         date_to = request.args.get('date_to')
         user = request.args.get('user')
         response = db.logs.find({'$and': [{'timestamp': {'$gt': time_format(date_from)}},
-                                      {'timestamp': {'$lt': time_format(date_to)}}]}).sort('_id', -1)
-
-        #if offset:
-            #response = responsedb.sort('_id', {'$lt': ObjectId(offset)}).limit[50]
-        #else:
-        #    response = responsedb
-
-        if response:
-            results = list(response)
-            objects = response_(results)
-            #index = len(results)-1
-            #offset_id = results[index].get('_id')
-            return render_template('index.html', objects=objects,
-                                                has_next= len(objects),
-                                                user = user,
-                                                date_to=date_to,
-                                                date_from=date_from)
+                                      {'timestamp': {'$lt': time_format(date_to)}}]}).sort('username', user).sort('_id', -1)
 
     else:
-        abort(404)
+       abort(404)
+
+    if response:
+        results = list(response)
+        objects = response_(results)
+        return render_template('index.html', objects=objects,
+                                             has_next= len(objects),
+                                             user = user,
+                                             date_to=date_to,
+                                             date_from=date_from)
+
 
 @app.route('/detail/<id>')
 def detail(id):
@@ -135,13 +100,14 @@ def get_detail(id):
                    query=data['query'],
                    path =data['path'],
                    method = data['method'],
-                   remoteip = data['remote_ip']
-                   )
+                   remoteip = data['remote_ip'])
+
 
 def redirect_url(default='index'):
     return request.args.get('next') or \
            request.referrer or \
            url_for(default)
+
 
 if __name__ == '__main__':
     app.debug = True
